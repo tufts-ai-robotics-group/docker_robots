@@ -6,11 +6,12 @@ You can more learn about docker at https://www.freecodecamp.org/news/the-docker-
 
 # Starting docker container
 
-- You can view all of your docker images with `docker image ls`
-- You should see your recently built docker image `kinova_gen_3_lite:latest`
-- Start this docker image with `docker run -it --net=host --device=/dev/bus/usb/ kinova_gen_3_lite_latest /bin/bash`
-  - Note that `-it` will start the container interactively, alternatively you could start headlessly and use the steps in the interacting section to attach.
+- Make sure the kinova is plugged in to a usb port on your machine
+- Start this docker image with`docker run -it --rm  --device=/dev/bus/usb/ --net=host --env=NVIDIA_VISIBLE_DEVICES=all --env=NVIDIA_DRIVER_CAPABILITIES=all --env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix kinova_gen_3_lite:latest /bin/bash`
+  - Note that `-it` will start the container interactively, alternatively you could start headless and use the steps in the interacting section to attach.
   - Note that `--net=host` will pass the host machines network namespace into the container. This may lead to port conflicts.
+  - Note the `--device` is used to pass through access to the kinova gen3 lite 
+- Once in the container the robot and rviz can be started with `roslaunch kortex_driver kortex_driver.launch arm:=gen3_lite gripper:=gen3_lite_2f dof:=6 start_rviz:=true`
 
 # Interacting
 
