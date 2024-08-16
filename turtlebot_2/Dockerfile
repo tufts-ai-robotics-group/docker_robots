@@ -2,6 +2,7 @@ FROM ros:kinetic
 
 RUN apt update && apt upgrade -y
 RUN apt install udev
+
 RUN mkdir -p ~/catkin_ws/src
 RUN bash -c "cd ~/catkin_ws \
  && rosdep install --from-paths src --ignore-src --rosdistro kinetic -y "
