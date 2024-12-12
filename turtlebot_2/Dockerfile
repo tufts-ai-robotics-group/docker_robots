@@ -11,7 +11,7 @@ RUN apt update && apt install  -y \
     ros-kinetic-roslint \
     ros-kinetic-rplidar-ros \
     ros-kinetic-map-server \
-    ros-kinetic-move-base
+    ros-kinetic-move-base \
     ros-kinetic-leg-detector
 RUN mkdir -p ~/catkin_ws/src
 RUN git clone https://github.com/tufts-ai-robotics-group/tufts_service_robots.git ~/catkin_ws/src
