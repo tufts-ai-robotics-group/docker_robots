@@ -1,14 +1,21 @@
 FROM ros:kinetic
 
-RUN apt update && apt upgrade -y
-RUN apt install udev
+RUN apt update && apt install  -y \
+    udev \
+    git \
+    chrony \
+    ros-kinetic-turtlebot \
+    ros-kinetic-kobuki \
+    ros-kinetic-ecl-streams \
+    ros-kinetic-sound-play \
+    ros-kinetic-roslint \
+    ros-kinetic-rplidar-ros
 
 RUN mkdir -p ~/catkin_ws/src
 RUN bash -c "cd ~/catkin_ws \
  && rosdep install --from-paths src --ignore-src --rosdistro kinetic -y "
-RUN apt install ros-kinetic-turtlebot* ros-kinetic-astra-* -y
-RUN apt-get install ros-kinetic-kobuki-* ros-kinetic-ecl-streams -y
-RUN apt install git chrony -y
+RUN git clone https://github.com/tufts-ai-robotics-group/tufts_service_robots.git ~/catkin_ws/src
+RUN git clone https://github.com/Slamtec/rplidar_ros.git
 RUN bash -c "source /opt/ros/kinetic/setup.bash && \
             cd ~/catkin_ws/ && \
             catkin_make"
