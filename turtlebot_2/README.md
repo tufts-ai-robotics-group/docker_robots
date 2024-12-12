@@ -8,7 +8,7 @@ You can more learn about docker at https://www.freecodecamp.org/news/the-docker-
 
 - You can view all of your docker images with `docker image ls`
 - You should see your recently built docker image `turtlebot:latest`
-- Start this docker image with `docker run -it --device=/dev/kobuki:/dev/kobuki --net=host --device=/dev/bus/usb/ -v /sys/fs/cgroup:/sys/fs/cgroup:ro turtlebot:latest /bin/bash`
+- Start this docker image with `docker run -it --device=/dev/kobuki:/dev/kobuki --device=/dev/ttyUSB0:/dev/rplidar --net=host --device=/dev/bus/usb/ -v /sys/fs/cgroup:/sys/fs/cgroup:ro turtlebot:latest /bin/bash`
   - Note that `-it` will start the container interactively, alternatively you could start headlessly and use the steps in the interacting section to attach.
   - Note that `--net=host` will pass the host machines network namespace into the container. This may lead to port conflicts.
 

@@ -9,13 +9,12 @@ RUN apt update && apt install  -y \
     ros-kinetic-ecl-streams \
     ros-kinetic-sound-play \
     ros-kinetic-roslint \
-    ros-kinetic-rplidar-ros
-
+    ros-kinetic-rplidar-ros \
+    ros-kinetic-map-server \
+    ros-kinetic-move-base
+    ros-kinetic-leg-detector
 RUN mkdir -p ~/catkin_ws/src
-RUN bash -c "cd ~/catkin_ws \
- && rosdep install --from-paths src --ignore-src --rosdistro kinetic -y "
 RUN git clone https://github.com/tufts-ai-robotics-group/tufts_service_robots.git ~/catkin_ws/src
-RUN git clone https://github.com/Slamtec/rplidar_ros.git
 RUN bash -c "source /opt/ros/kinetic/setup.bash && \
             cd ~/catkin_ws/ && \
             catkin_make"
