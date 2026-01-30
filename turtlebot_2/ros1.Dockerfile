@@ -1,4 +1,12 @@
+# unlike our other dockerfiles, we only support melodic here
 FROM ros:melodic
+
+# update gpg keys
+RUN rm -f /etc/apt/sources.list.d/ros*.list && \
+    apt-get update && apt-get install -y --no-install-recommends curl gnupg2 lsb-release && \
+    curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+    sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" > /etc/apt/sources.list.d/ros-latest.list' && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt update && apt install  -y \
     udev \
